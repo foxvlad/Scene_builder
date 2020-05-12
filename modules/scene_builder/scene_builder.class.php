@@ -132,6 +132,68 @@ function usual(&$out) {
  function install($data='') {
   parent::install();
  }
+ 
+ /**
+* Uninstall
+*
+* Module uninstall routine
+*
+* @access public
+*/
+ function uninstall() {
+  SQLExec('DROP TABLE IF EXISTS scene_builder');
+  SQLExec('DROP TABLE IF EXISTS scenes_element_builder');
+  parent::uninstall();
+ }
+/**
+* dbInstall
+*
+* Database installation routine
+*
+* @access private
+*/
+ function dbInstall($data) {
+/*
+
+*/
+  $data = <<<EOD
+ scene_builder: ID int(10) unsigned NOT NULL auto_increment
+ scene_builder: SCENES_ID int(10) NOT NULL DEFAULT '0'
+ scene_builder: TEMPLATE varchar(255) NOT NULL DEFAULT ''
+ scene_builder: TEMPLATE_CSS varchar(255) NOT NULL DEFAULT ''
+ scene_builder: ADDITION varchar(255) NOT NULL DEFAULT ''
+ scene_builder: HOME_IMG varchar(255) NOT NULL DEFAULT ''
+ scene_builder: TYPE_SCENE varchar(255) NOT NULL DEFAULT ''
+ scene_builder: HOME_SCENE varchar(255) NOT NULL DEFAULT ''
+ scene_builder: CLONE_MENU varchar(255) NOT NULL DEFAULT ''
+ scene_builder: PRIORITY int(10) NOT NULL DEFAULT '0'
+ scenes_element_builder: ID int(10) unsigned NOT NULL auto_increment
+ scenes_element_builder: TITLE varchar(100) NOT NULL DEFAULT ''
+ scenes_element_builder: POSITION varchar(100) NOT NULL DEFAULT ''
+ scenes_element_builder: VALUE varchar(255) NOT NULL DEFAULT ''
+ scenes_element_builder: HTML longtext NOT NULL DEFAULT ''
+ scenes_element_builder: TEXTAREA longtext NOT NULL DEFAULT ''
+ scenes_element_builder: TYPE varchar(255) NOT NULL DEFAULT ''
+ scenes_element_builder: SCENE_LINK varchar(100) NOT NULL DEFAULT ''
+ scenes_element_builder: ICO varchar(255) NOT NULL DEFAULT ''
+ scenes_element_builder: SHOW1 varchar(255) NOT NULL DEFAULT ''
+ scenes_element_builder: SHOW2 varchar(255) NOT NULL DEFAULT ''
+ scenes_element_builder: PARENT_ID int(10) NOT NULL DEFAULT '0'
+ scenes_element_builder: LINKED_OBJECT varchar(100) NOT NULL DEFAULT ''
+ scenes_element_builder: LINKED_PROPERTY varchar(100) NOT NULL DEFAULT ''
+ scenes_element_builder: LINKED_METHOD varchar(100) NOT NULL DEFAULT ''
+ scenes_element_builder: PRIORITY int(10) NOT NULL DEFAULT '0'
+ 
+ 
+EOD;
+  parent::dbInstall($data);
+ }
+ 
+ 
+ 
+ 
+ 
+ 
 // --------------------------------------------------------------------
 }
 /*
